@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 
 
 interface FormData {
@@ -27,7 +27,7 @@ const roles = [
   { value: 3, name: 'Должность 3' }
 ];
 
-const errors = ref({
+const errors = reactive({
   username: '',
   email: '',
   password: '',
@@ -38,21 +38,21 @@ const registrationSuccess = ref(false);
 
 const submitForm = () => {
   // Проверка на заполнение всех обязательных полей
-  if (!formData.value.username) errors.value.username = 'Введите имя пользователя';
-  else errors.value.username = '';
+  if (!formData.value.username) errors.username = 'Введите имя пользователя';
+  else errors.username = '';
 
-  if (!formData.value.email) errors.value.email = 'Введите email';
-  else errors.value.email = '';
+  if (!formData.value.email) errors.email = 'Введите email';
+  else errors.email = '';
 
-  if (!formData.value.password) errors.value.password = 'Введите пароль';
-  else errors.value.password = '';
+  if (!formData.value.password) errors.password = 'Введите пароль';
+  else errors.password = '';
 
-  if (!formData.value.password_repeat) errors.value.password_repeat = 'Повторите пароль';
-  else errors.value.password_repeat = '';
+  if (!formData.value.password_repeat) errors.password_repeat = 'Повторите пароль';
+  else errors.password_repeat = '';
 
   if (formData.value.password !== formData.value.password_repeat) {
-    errors.value.password = 'Пароли не совпадают';
-    errors.value.password_repeat = 'Пароли не совпадают';
+    errors.password = 'Пароли не совпадают';
+    errors.password_repeat = 'Пароли не совпадают';
   }
 
    // Проверка согласия на обработку персональных данных
@@ -62,7 +62,7 @@ const submitForm = () => {
   }
 
   // Если все поля заполнены, отправляем данные
-  if (!Object.values(errors.value).some(error => error !== '')) {
+  if (!Object.values(errors).some(error => error !== '')) {
     // Моковый POST запрос
     console.log('Отправка данных:', formData.value);
     // Мой код отправки данных здесь

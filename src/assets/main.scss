@@ -111,6 +111,10 @@ body {
     &__none {
         border-color: transparent;
     }
+    &__none:focus {
+        border-color: transparent;
+        box-shadow: 0 0 15px transparent;
+    }
   
     &__select {
       color: #9292A0;
@@ -210,10 +214,12 @@ body {
 
 .checkbox-container input:checked + .checkmark {
     left: 100%; 
+    background-color: #3586FF; 
 }
 
-.checkbox-container input:checked ~ .checkbox-container {
-  background-color: #3586FF; 
+.checkbox-container input:checked ~ div h4,
+.checkbox-container input:checked ~ div p {
+  color: #3586FF; 
 }
 
   @media (max-width: 768px) {
